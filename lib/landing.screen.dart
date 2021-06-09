@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:the_hymns/group_songs.dart';
+import 'package:the_hymns/home_screen.dart';
 import 'package:the_hymns/song_index.dart';
 
 class LandingScreen extends StatefulWidget {
@@ -24,7 +23,7 @@ class LandingScreenState extends State<LandingScreen> {
 
   List<Widget> children() {
     return [
-      LandingScreen(),
+      HomeScreen(),
       SongIndex(),
       GroupSong(),
     ];
@@ -53,8 +52,7 @@ class LandingScreenState extends State<LandingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: PersistentTabView(
+    return PersistentTabView(
       context,
       controller: _controller,
       screens: children(),
@@ -62,9 +60,11 @@ class LandingScreenState extends State<LandingScreen> {
       confineInSafeArea: true,
       backgroundColor: Colors.blue,
       handleAndroidBackButtonPress: true,
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset:
+          true, // This needs to be true if you want to move up the screen when keyboard appears.
       stateManagement: false,
-      hideNavigationBarWhenKeyboardShows: true,
+      hideNavigationBarWhenKeyboardShows:
+          true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument.
       decoration: NavBarDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(15.0),
@@ -86,7 +86,8 @@ class LandingScreenState extends State<LandingScreen> {
         duration: Duration(milliseconds: 200),
       ),
       navBarHeight: 60,
-      navBarStyle: NavBarStyle.style15,
-    ));
+      navBarStyle:
+          NavBarStyle.style3, // Choose the nav bar style with this property.
+    );
   }
 }
